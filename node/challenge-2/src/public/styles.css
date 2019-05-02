@@ -290,3 +290,7 @@ ul.providers {
 .main-wrapper .content form button:hover {
     background: #634dac;
 }
+
+.avatar-input {
+    cursor: pointer;
+}
