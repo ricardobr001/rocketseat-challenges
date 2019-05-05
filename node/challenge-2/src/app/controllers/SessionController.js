@@ -20,7 +20,16 @@ class SessionController {
             return res.redirect('/')
         }
 
+        req.session.user = user
+
         return res.redirect('/app/dashboard')
+    }
+
+    destroy (req, res) {
+        req.session.destroy(() => {
+            res.clearCookie('root')
+            return res.redirect('/')
+        })
     }
 }
 
