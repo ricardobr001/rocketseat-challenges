@@ -11,7 +11,7 @@ class SessionController {
         const user = await User.findOne({ where: { email } })
 
         if (!user) {
-            req.flash('error', 'User note found!')
+            req.flash('error', 'User not found!')
             return res.redirect('/')
         }
 
