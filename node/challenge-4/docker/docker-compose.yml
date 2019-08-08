@@ -1,0 +1,11 @@
+version: "3"
+services:
+  database:
+    image: "kartoza/postgis"
+    container_name: "database"
+    ports:
+      - "5432:5432"
+    volumes:
+      - my_dbdata:/var/lib/postgresql
+volumes:
+  my_dbdata:
