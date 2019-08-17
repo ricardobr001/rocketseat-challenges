@@ -40,7 +40,7 @@ class ProjectController {
   async destroy ({ params }) {
     const project = await Project.findOrFail(params.id)
 
-    project.delete()
+    await project.delete()
   }
 }
 
