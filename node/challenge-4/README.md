@@ -26,3 +26,28 @@ Run the following command to run startup migrations.
 ```js
 adonis migration:run
 ```
+
+### Executing
+
+First, install the dependecies using the command
+
+```
+npm install
+```
+
+Then go to the folder `docker` and execute
+
+```bash
+docker-compose up 
+```
+
+Run the main server in `development` mode using the command
+
+```bash
+adonis serve --dev
+```
+
+Run the queue listener using the command
+```
+adonis kue:listen
+```
