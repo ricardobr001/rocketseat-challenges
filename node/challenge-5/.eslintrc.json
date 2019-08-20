@@ -1,16 +1,15 @@
 {
+    "plugins": ["jest"],
     "env": {
         "commonjs": true,
         "es6": true,
-        "node": true
+        "node": true,
+        "jest/globals": true
     },
     "extends": "standard",
     "globals": {
         "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly",
-        "describe": true,
-        "expect": true,
-        "it": true
+        "SharedArrayBuffer": "readonly"
     },
     "parserOptions": {
         "ecmaVersion": 2018
