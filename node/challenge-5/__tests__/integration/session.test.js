@@ -1,4 +1,5 @@
 const request = require('supertest')
+const nodemailer = require('nodemailer')
 
 const app = require('../../src/app')
 const truncate = require('../utils/truncate')
@@ -7,9 +8,19 @@ const factory = require('../factories')
 const CORRECT_PASS = 'secret'
 const WRONG_PASS = 'wrong'
 
+jest.mock('nodemailer')
+
+const transport = {
+    sendMail: jest.fn()
+}
+
 describe('Authentication', () => {
     beforeEach(async () => {
         await truncate()
+    })
+
+    beforeAll(() => {
+        nodemailer.createTransport.mockReturnValue(transport)
     })
 
     it('should be able to authenticate with valid credentials', async () => {
@@ -74,5 +85,21 @@ describe('Authentication', () => {
             .set('Authorization', 'Bearer wrongToken')
 
         expect(response.status).toBe(401)
+    })
+
+    it('should receive email notification when authenticated', async () => {
+        const user = await factory.create('User', {
+            password: CORRECT_PASS
+        })
+
+        const response = await request(app).post('/sessions').send({
+            email: user.email,
+            password: CORRECT_PASS
+        })
+
+        expect(transport.sendMail).toHaveBeenCalledTimes(1)
+        expect(transport.sendMail.mock.calls[0][0].to).toBe(
+            `${user.name} <${user.email}>`
+        )
     })
 })
