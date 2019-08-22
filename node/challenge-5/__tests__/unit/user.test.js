@@ -1,7 +1,8 @@
 const bcrypt = require('bcryptjs')
 
-const { User } = require('../../src/app/models')
 const truncate = require('../utils/truncate')
+const factory = require('../factories')
+const CORRECT_PASS = 'secret'
 
 describe('User', () => {
     beforeEach(async () => {
@@ -9,13 +10,11 @@ describe('User', () => {
     })
 
     it('should encrypt user password', async () => {
-        const user = await User.create({
-            name: 'Ricardo',
-            email: 'ricardo@email.com',
-            password: 'secret'
+        const user = await factory.create('User', {
+            password: CORRECT_PASS
         })
 
-        const compareHash = await bcrypt.compare('secret', user.password_hash)
+        const compareHash = await bcrypt.compare(CORRECT_PASS, user.password_hash)
 
         expect(compareHash).toBe(true)
     })
