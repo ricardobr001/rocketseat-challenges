@@ -1,13 +1,10 @@
 import React from 'react'
 
 import './App.css'
-import image from './assets/gandalf.jpg'
+import TechList from './components/TechList'
 
 function App() {
-    return [
-        <h1>First react component</h1>,
-        <img src={image} />
-    ]
+    return <TechList />
 }
 
 export default App
