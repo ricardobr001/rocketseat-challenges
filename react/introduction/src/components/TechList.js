@@ -5,8 +5,28 @@ import TechItem from './TechItem'
 class TechList extends Component {
     state = {
         newTech: '',
-        techs: ['NodeJS', 'ReactJS', 'React Native']
+        techs: []
     }
+
+    // Executed when component show in the screen
+    componentDidMount() {
+        const techs = localStorage.getItem('techs')
+
+        if (techs) {
+            this.setState({ techs: JSON.parse(techs) })
+        }
+    }
+
+    // Executed always when the component changes or the state
+    componentDidUpdate(_, prevState) {
+        // this.props, this.state
+        if (prevState.techs !== this.state.techs) {
+            localStorage.setItem('techs', JSON.stringify(this.state.techs))
+        }
+    }
+
+    // Executed when component dies
+    componentWillUnmount() {}
 
     handleInputChange = e => {
         this.setState({ newTech: e.target.value })
@@ -36,7 +56,7 @@ class TechList extends Component {
                                 onDelete={() => this.handleDelete(tech)}
                             />
                         ))}
-                        <TechItem />
+                        {/* <TechItem /> */}
                     </ul>
                     <input
                         type="text"
