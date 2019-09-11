@@ -5,11 +5,7 @@ import TechItem from './TechItem'
 class TechList extends Component {
     state = {
         newTech: '',
-        techs: [
-            'NodeJS',
-            'ReactJS',
-            'React Native'
-        ]
+        techs: ['NodeJS', 'ReactJS', 'React Native']
     }
 
     handleInputChange = e => {
@@ -28,18 +24,19 @@ class TechList extends Component {
         this.setState({ techs: this.state.techs.filter(t => t !== tech) })
     }
 
-    render () {
+    render() {
         return (
             <>
                 <form onSubmit={this.handleSubmit}>
                     <ul>
-                        {this.state.techs.map(tech => 
+                        {this.state.techs.map(tech => (
                             <TechItem
                                 key={tech}
                                 tech={tech}
                                 onDelete={() => this.handleDelete(tech)}
                             />
-                        )}
+                        ))}
+                        <TechItem />
                     </ul>
                     <input
                         type="text"
