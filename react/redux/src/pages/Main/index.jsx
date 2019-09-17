@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import { MdAddShoppingCart } from 'react-icons/md'
 import api from '../../services/api'
@@ -60,6 +61,17 @@ class Main extends Component {
       </ProductList>
     )
   }
+}
+
+Main.propTypes = {
+  product: PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    price: PropTypes.number,
+    image: PropTypes.string,
+    priceFormatted: PropTypes.string
+  }).isRequired,
+  dispatch: PropTypes.func.isRequired
 }
 
 export default connect()(Main)
