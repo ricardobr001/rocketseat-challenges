@@ -29,10 +29,10 @@ class Main extends Component {
     this.setState({ products: data })
   }
 
-  handleAddProduct = product => {
-    const { addToCart } = this.props
+  handleAddProduct = id => {
+    const { addToCartRequest } = this.props
 
-    addToCart(product)
+    addToCartRequest(id)
   }
 
   render() {
@@ -48,7 +48,7 @@ class Main extends Component {
             <span>U$ {product.priceFormatted}</span>
             <button
               type="button"
-              onClick={() => this.handleAddProduct(product)}
+              onClick={() => this.handleAddProduct(product.id)}
             >
               <div>
                 <MdAddShoppingCart size={16} color="#fff" />{' '}
@@ -82,7 +82,7 @@ Main.propTypes = {
     image: PropTypes.string,
     priceFormatted: PropTypes.string
   }).isRequired,
-  addToCart: PropTypes.func.isRequired
+  addToCartRequest: PropTypes.func.isRequired
 }
 
 export default connect(
